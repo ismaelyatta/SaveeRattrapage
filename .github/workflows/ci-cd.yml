@@ -41,13 +41,6 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Create Release
-        id: create_release  # Define an ID for this step
-        run: echo "Creating release..."  # Replace with actual release creation step
-        # You need to set outputs.upload_url here
-        outputs:
-          upload_url: ${{ secrets.UPLOAD_URL }}  # Replace with actual upload URL
-
       - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
