@@ -16,60 +16,56 @@ jobs:
     runs-on: macos-latest  # Use macOS machine
 
     steps:
-      - name: Checkout code
+      - name: Fetch Sources
         uses: actions/checkout@v2
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          fetch-depth: 0
 
       - name: Setup JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '11'  # Adjust the Java version as needed
+          distribution: 'zulu'
+          java-version: '11'
 
-      - name: Android Emulator Runner
-        uses: ReactiveCircus/android-emulator-runner@v2.28.0
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+
+      - name: Setup Gradle Cache
+        uses: actions/cache@v2
         with:
-          api-level: 29  # Adjust the API level as needed
-          emulator-image: system-images;android-29;google_apis;x86_64  # Adjust the emulator image as needed
-          script: ./gradlew connectedCheck
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      - name: Grant execute permission for Gradle wrapper
+      - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Build and Test
-        run: ./gradlew build
-        env:
-          JVM_OPTS: -Xmx512m  # Adjust memory settings as needed
-          GRADLE_OPTS: -Dorg.gradle.daemon=false  # Disable Gradle daemon for CI
+      - name: Run Ktlint
+        run: ./gradlew ktlintStagingDebugCheck
 
-  release:
-    name: Build and Release
-    runs-on: macos-latest  # Use macOS machine
-    needs: build
-    if: github.ref == 'refs/heads/main'  # Release only from the main branch
+      - name: Run Unit Tests
+        run: ./gradlew testStagingDebugUnitTest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Run Linters and Test
+        run: ./gradlew check
 
-      - name: Setup JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'  # Adjust the Java version as needed
-
-      - name: Android Emulator Runner
-        uses: ReactiveCircus/android-emulator-runner@v2.28.0
-        with:
-          api-level: 29  # Adjust the API level as needed
-          emulator-image: system-images;android-29;google_apis;x86_64  # Adjust the emulator image as needed
-          script: ./gradlew connectedCheck
-
-      - name: Grant execute permission for Gradle wrapper
-        run: chmod +x ./gradlew
-
-      - name: Build Release APK
-        run: ./gradlew bundleRelease
-
-      - name: Upload APK Artifact
+      - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
-          name: release-apk
-          path: app/build/outputs/bundle/release/app-release.aab
+          name: Test-Reports
+          path: app/build/reports
+        if: always()
+
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/release/app-release.apk
+          asset_name: signed-artifact.apk
+          asset_content_type: application/zip
