@@ -19,7 +19,6 @@ jobs:
       - name: Fetch Sources
         uses: actions/checkout@v2
         with:
-          # Number of commits to fetch. 0 indicates all history for all branches and tags.
           fetch-depth: 0
 
       - name: Setup JDK
@@ -30,7 +29,6 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v2
-
 
       - name: Setup Gradle Cache
         uses: actions/cache@v2
@@ -43,6 +41,13 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Create Release
+        id: create_release  # Define an ID for this step
+        run: echo "Creating release..."  # Replace with actual release creation step
+        # You need to set outputs.upload_url here
+        outputs:
+          upload_url: ${{ secrets.UPLOAD_URL }}  # Replace with actual upload URL
+
       - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
@@ -50,22 +55,13 @@ jobs:
           path: app/build/reports
         if: always()
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-            # ... other inputs ...
-        outputs:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-
-
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}  # Use the correct step ID
           asset_path: app/build/outputs/apk/release/app-release.apk
           asset_name: signed-artifact.apk
           asset_content_type: application/zip
