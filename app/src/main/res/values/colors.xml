@@ -9,4 +9,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bleusavee">#93CDDB</color>
     <color name="noirsavee">#262828</color>
+    <color name="colorPrimary">#993F51B5</color>
+    <color name="colorPrimaryDark">#99303f9f</color>
+    <color name="colorAccent">#80d8ff</color>
+    <color name="digitForeground">#000000</color>
+    <color name="chartCurrent">#1976d2</color>
+    <color name="chartPrior">#7f1976d2</color>
+    <color name="tableHeader">#33666666</color>
+    <color name="tableBorder">#88efefef</color>
 </resources>
