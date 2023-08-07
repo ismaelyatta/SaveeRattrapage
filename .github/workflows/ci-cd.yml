@@ -25,10 +25,12 @@ jobs:
           java-version: '11'  # Adjust the Java version as needed
 
       - name: Set up Android emulator
-        uses: actions/setup-android-emulator@v2
+        uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30  # Adjust the API level as needed
-          emulator-version: '30.0.0'  # Adjust the emulator version as needed
+          api-level: 29  # Adjust the API level as needed
+          ndk: 21.0.6113669  # Adjust NDK version if needed
+          cmake: 3.10.2.4988404  # Adjust CMake version if needed
+          script: ./gradlew connectedCheck
 
       - name: Grant execute permission for Gradle wrapper
         run: chmod +x ./gradlew
@@ -55,10 +57,12 @@ jobs:
           java-version: '11'  # Adjust the Java version as needed
 
       - name: Set up Android emulator
-        uses: actions/setup-android-emulator@v2
+        uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30  # Adjust the API level as needed
-          emulator-version: '30.0.0'  # Adjust the emulator version as needed
+          api-level: 29  # Adjust the API level as needed
+          ndk: 21.0.6113669  # Adjust NDK version if needed
+          cmake: 3.10.2.4988404  # Adjust CMake version if needed
+          script: ./gradlew connectedCheck
 
       - name: Grant execute permission for Gradle wrapper
         run: chmod +x ./gradlew
