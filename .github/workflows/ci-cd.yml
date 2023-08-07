@@ -35,6 +35,9 @@ jobs:
 
       - name: Build and Test
         run: ./gradlew build
+        env:
+          JVM_OPTS: -Xmx512m  # Adjust memory settings as needed
+          GRADLE_OPTS: -Dorg.gradle.daemon=false  # Disable Gradle daemon for CI
 
   release:
     name: Build and Release
