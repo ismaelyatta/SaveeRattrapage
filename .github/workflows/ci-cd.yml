@@ -75,7 +75,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Download the APK from the following link:
-            [APK Download Link](https://example.com/${{ needs.upload-to-cloud.outputs.url }})
+            [APK Download Link](https://github.com/ismaelyatta/SaveeRattrapage/releases/tag/savee_dev/${{ needs.upload-to-cloud.outputs.url }})
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v2
