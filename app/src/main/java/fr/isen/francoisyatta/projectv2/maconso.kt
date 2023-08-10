@@ -21,23 +21,23 @@ class maconso : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maconso)  //liaison du code .kotlin à l'affichage layout .xml
+        setContentView(R.layout.activity_maconso)
 
 
         binding = ActivityMaconsoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val actionBar : ActionBar? = supportActionBar
-        //actionBar!!.setDisplayHomeAsUpEnabled(true)
-        //actionBar!!.setDisplayShowHomeEnabled(true)
+        val actionBar : ActionBar? = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar!!.setDisplayShowHomeEnabled(true)
 
-        // prend les données depuis putExtra intent
+        // get data from putExtra intent
         val intent = intent
         val aTitle = intent.getStringExtra("iTitle")
 
-        //définit le titre dans une autre activité
-        //actionBar.setTitle(aTitle)
-        //aTitle.text = aTitle
+        //set title in another activity
+        actionBar.setTitle(aTitle)
+        //a_title.text = aTitle
         initializeScreen()
     }
     private fun initializeScreen() {
@@ -60,7 +60,6 @@ class maconso : AppCompatActivity() {
         return lineDataset
     }
 
-    //fonction pour effectuer le tracé de la courbe de consommation
     private fun drawChart(linesDataSet: List<LineDataSet>, chart: LineChart) {
         val data = LineData(linesDataSet)
         chart.data = data
@@ -89,7 +88,6 @@ class maconso : AppCompatActivity() {
         chart.axisRight.isEnabled = false
     }
 
-    //fonction où on rentre les valeurs des abscisses et des ordonnées
     private fun evolution_consommation(): ArrayList<Entry> {
         val lineValues = ArrayList<Entry>()
         lineValues.add(Entry(0f, 5.1F))
