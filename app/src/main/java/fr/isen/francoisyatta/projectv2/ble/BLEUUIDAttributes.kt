@@ -1,6 +1,6 @@
 package fr.isen.francoisyatta.projectv2.ble
 
-enum class BLEUUIDAttributes(val uuid: String, val title: String) {
+enum class BLEUUIDAttributes(val uuid: String, val title: String)  {
     GENERIC_ACCESS("00001800-0000-1000-8000-00805f9b34fb", "Accès générique"),
     GENERIC_ATTRIBUTE("00001801-0000-1000-8000-00805f9b34fb", "Attribut générique"),
     CUSTOM_SERVICE("466c1234-f593-11e8-8eb2-f2801f1b9fd1", "Service spécifique"),

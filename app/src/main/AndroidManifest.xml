@@ -63,15 +63,6 @@
             android:exported="false"
             android:parentActivityName=".ConnexionActivity" />
         <activity
-            android:name=".ble.BLEUUIDAttributes"
-            android:exported="false" />
-        <activity
-            android:name=".ble.BleServiceAdapter"
-            android:exported="false" />
-        <activity
-            android:name=".ble.BleService"
-            android:exported="false" />
-        <activity
             android:name=".ble.DeviceDetailActivity"
             android:exported="false">
             <meta-data
