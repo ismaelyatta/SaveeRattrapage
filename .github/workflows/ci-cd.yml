@@ -1,0 +1,38 @@
+name: Android CI/CD
+
+on:
+  push:
+    branches:
+      - main  # Adjust to your default branch
+      - dev
+  pull_request:
+    branches:
+      - main  # Adjust to your default branch
+      - dev
+      
+
+jobs:
+  build:
+    name: Build and Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
