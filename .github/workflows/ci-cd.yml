@@ -1,6 +1,13 @@
 name: Android Release CI/CD
-
 on:
+  push:
+    branches:
+      - main 
+      - dev
+  pull_request:
+    branches:
+      - main  
+      - dev 
   release:
     types:
       - created
