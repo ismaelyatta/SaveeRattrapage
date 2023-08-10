@@ -23,9 +23,9 @@ jobs:
 
       - name: Set up JDK
         uses: actions/setup-java@v2
-        distribution: 'adopt'
         with:
           java-version: 11
+          distribution: 'adopt'
 
       - name: Make Gradle executable
         run: chmod +x ./gradlew
