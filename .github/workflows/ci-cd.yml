@@ -58,10 +58,22 @@ jobs:
   release:
     needs: upload-to-cloud
     runs-on: ubuntu-latest
+  print-token:
+    permissions: write-all
+    name: print-token
+    environment: dev
+    # needs: pre-pkr
+    runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Get registration token
+        id: getRegToken
+        run: |
+            curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token  
 
       - name: Set up Git
         run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
