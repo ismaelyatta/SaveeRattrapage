@@ -56,12 +56,10 @@ jobs:
         run: echo "::set-output name=url::$(echo ${{ steps.upload-to-cloud.outputs.artifact-upload-path }} | cut -c 2-)"
 
   release:
-    needs: upload-to-cloud
-    runs-on: ubuntu-latest
-  print-token:
     permissions: write-all
-    name: print-token
+    name: release
     environment: dev
+    needs: upload-to-cloud
     # needs: pre-pkr
     runs-on: ubuntu-latest
 
