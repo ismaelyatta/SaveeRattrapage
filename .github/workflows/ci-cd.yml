@@ -87,6 +87,7 @@ jobs:
   download:
       runs-on: ubuntu-latest
       needs: release
+      name: download
 
   steps:
       - name: Checkout code
