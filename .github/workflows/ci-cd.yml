@@ -86,33 +86,32 @@ jobs:
 
   download:
       runs-on: ubuntu-latest
-      environment: dev
       needs: release
 
-      steps:
-          - name: Checkout code
-            uses: actions/checkout@v2
+  steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-          - name: Download APK Artifact
-            uses: actions/download-artifact@v1
-            with:
-              name: app
-              path: downloaded-apk/
+      - name: Download APK Artifact
+        uses: actions/download-artifact@v1
+        with:
+           name: app
+           path: downloaded-apk/
 
-          - name: List downloaded files
-            run: ls downloaded-apk/
+      - name: List downloaded files
+        run: ls downloaded-apk/
 
-          - name: Create Release
-            id: create_release
-            uses: actions/create-release@v1
-            env:
-               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-            with:
-            tag_name: dev_app
-            release_name: Release dev_app
-            body: |
-              Changes in this Release
-              - First Change
-              - Second Change
-            draft: false
-            release: false
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+              tag_name: dev_app
+              release_name: Release dev_app
+              body: |
+                  Changes in this Release
+                  - First Change
+                  - Second Change
+              draft: false
+              release: false
