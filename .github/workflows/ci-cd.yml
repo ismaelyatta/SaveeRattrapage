@@ -118,7 +118,7 @@ jobs:
                 upload_url: ${{ steps.create_release.outputs.upload_url }}
                 asset_path: source-code
                 asset_name: source-code.zip
-                asset_content_type: application/zip
+                asset_content_type: source-code/zip
         env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
