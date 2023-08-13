@@ -78,8 +78,6 @@ jobs:
       - name: Set up Git
         run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
 
-      - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
@@ -120,7 +118,7 @@ jobs:
                 upload_url: ${{ steps.create_release.outputs.upload_url }}
                 asset_path: source-code
                 asset_name: source-code.zip
-                asset_content_type: application/zip
+                asset_content_type: source-code/zip
         env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
