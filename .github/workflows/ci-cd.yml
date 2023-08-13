@@ -19,12 +19,21 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    environment: dev
+    permissions: write-all
 
 
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Get registration token
+        id: getRegToken
+        run: |
+            curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
+            - name: Set up Git
+              run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"  
 
       - name: Set up JDK
         uses: actions/setup-java@v2
@@ -49,10 +58,18 @@ jobs:
   upload-to-cloud:
     needs: build
     runs-on: ubuntu-latest
+    environment: dev
+    permissions: write-all
+
 
 
     steps:
-
+    - name: Get registration token
+      id: getRegToken
+      un: |
+            curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
+            - name: Set up Git
+              run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
     - name: Upload APK to Cloud Storage
       uses: actions/upload-artifact@v2
       with:
@@ -83,17 +100,12 @@ jobs:
       - name: Set up Git
         run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
 
-      - name: Make Gradle executable
-        run: chmod +x ./gradlew
-
-      - name: Build APK
-        run: ./gradlew assembleRelease
-
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
           name: app
           path: app/build/outputs/apk/debug/app-debug.apk
+
       - name: Upload Source Code
         uses: actions/upload-artifact@v2
         with:
