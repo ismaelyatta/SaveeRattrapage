@@ -17,17 +17,17 @@ Welcome to the SaveeRattrapage Git repository! This repository contains a projec
 
 SaveeRattrapage is a tool aimed at helping students stay organized and on top of their academic responsibilities. Whether you're attending school, college, or university, this application offers features that enable you to manage your coursework, assignments, and exams efficiently.
 
-## Features {#features}
+## Features 
 
 - **Dashboard:** Monitor your energy consumption (prices, date,...) 
 - **CI/CD:** Deploy the source code and APK using Github actions pipeline.
 - **Notifications:** Export in pdf your energy consumtion.
 
-## Getting Started {#getting-started}
+## Getting Started 
 
 Follow these steps to get the SaveeRattrapage project up and running on your local machine.
 
-### Prerequisites {#prerequisites}
+### Prerequisites 
 
 Before you begin, ensure you have the following:
 
@@ -35,7 +35,7 @@ Before you begin, ensure you have the following:
 - JDK : Make sure you have JDK 11 installed. You can download it from [oracle.com](https://www.oracle.com/fr/java/technologies/javase/jdk11-archive-downloads.html). 
 - SDK android: Make sure you have JDK installed. You can download it from [developper.android.com](https://developer.android.com/tools/releases/platform-tools)
 
-### Installation {#installation}
+### Installation 
 
 1. Clone the repository:
 
