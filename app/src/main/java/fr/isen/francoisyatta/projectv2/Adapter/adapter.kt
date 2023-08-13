@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package fr.isen.francoisyatta.projectv2.Adapter
 
 

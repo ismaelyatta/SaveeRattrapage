@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_new_meter"
+        android:orderInCategory="100"
+        android:title="@string/menu_action_new_meter" />
+
+    <item
+        android:id="@+id/action_new_bill"
+        android:orderInCategory="100"
+        android:title="@string/menu_action_new_bill" />
+
+    <item
+        android:id="@+id/action_export"
+        android:enabled="true"
+        android:orderInCategory="100"
+        android:title="@string/menu_action_export" />
+
+    <item
+        android:id="@+id/action_import"
+        android:enabled="true"
+        android:orderInCategory="100"
+        android:title="@string/menu_action_import" />
+
+</menu>
