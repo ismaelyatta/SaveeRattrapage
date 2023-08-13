@@ -1,4 +1,4 @@
-# SaveeRattrapage - Android App ![Build status](https://github.com/ismaelyatta/SaveeRattrapage/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher_foreground_savee.png)
+# SaveeRattrapage ![Build status](https://github.com/ismaelyatta/SaveeRattrapage/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher_foreground_savee.png)
 
 Welcome to the SaveeRattrapage Git repository! This repository contains a project developed by Ismael, Yacine, Arnold designed to assist households in monitoring their electricity consumption in real time, providing them with an instant overview of their energy usage.
 
