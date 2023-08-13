@@ -9,8 +9,7 @@ Welcome to the SaveeRattrapage Git repository! This repository contains a projec
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
+- [Contributing](#Maintainers)
 - [License](#license)
 
 <a name="introduction"></a>
@@ -44,9 +43,16 @@ Before you begin, ensure you have the following:
 
    ```bash
    git clone https://github.com/ismaelyatta/SaveeRattrapage.git
-   
+
+2. Open Current directory  
  ```bash
 cd SaveeRattrapage
+
+## Maintainers
+This project is mantained by:
+* [Yacine FOSSO](https://github.com/FOSSO2022)
+* [Arnold Dedji](https://www.linkedin.com/in/arnold-dedji-smart-energy/)
+* [Ismael Francois Yatta](https://www.linkedin.com/in/ismael-francois-yatta-a8452a211/)
 
    
    
