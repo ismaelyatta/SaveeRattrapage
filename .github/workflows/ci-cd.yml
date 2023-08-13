@@ -4,7 +4,7 @@ name: Android Release CI/CD
     branches:
       - main
       - dev
-    tags: null
+
   pull_request:
     branches:
       - main
