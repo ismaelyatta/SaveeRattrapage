@@ -19,12 +19,9 @@ SaveeRattrapage is a tool aimed at helping students stay organized and on top of
 
 ## Features {#features}
 
-- **Dashboard:** Provides an overview of upcoming assignments, exams, and classes.
-- **Course Management:** Add, edit, and delete courses you're currently taking.
-- **Assignment Tracker:** Keep track of assignment details, deadlines, and progress.
-- **Exam Schedule:** Maintain a schedule of your upcoming exams and their respective dates.
-- **Notifications:** Receive reminders for assignment due dates and upcoming exams.
-- **Progress Visualization:** Visualize your academic progress over time through charts and graphs.
+- **Dashboard:** Monitor your energy consumption (prices, date,...) 
+- **CI/CD:** Deploy the source code and APK using Github actions pipeline.
+- **Notifications:** Export in pdf your energy consumtion.
 
 ## Getting Started {#getting-started}
 
@@ -34,7 +31,9 @@ Follow these steps to get the SaveeRattrapage project up and running on your loc
 
 Before you begin, ensure you have the following:
 
-- Node.js: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/).
+- Android Studio: Make sure you have Android Studio installed. You can download it from [developer.android.com](https://developer.android.com/studio).
+- JDK : Make sure you have JDK 11 installed. You can download it from [oracle.com](https://www.oracle.com/fr/java/technologies/javase/jdk11-archive-downloads.html). 
+- SDK android: Make sure you have JDK installed. You can download it from [developper.android.com](https://developer.android.com/tools/releases/platform-tools)
 
 ### Installation {#installation}
 
