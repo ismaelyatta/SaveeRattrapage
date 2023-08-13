@@ -1,6 +1,6 @@
 # SaveeRattrapage - Android App ![Build status](https://github.com/ismaelyatta/SaveeRattrapage/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher_foreground_savee.png)
 
-Welcome to the SaveeRattrapage Git repository! This repository contains a project developed by Ismael Yatta, designed to help users manage their academic progress and schedule effectively. The application assists students in tracking their coursework, assignments, and exams, ultimately aiding in achieving academic success.
+Welcome to the SaveeRattrapage Git repository! This repository contains a project developed by Ismael, Yacine, Arnold designed to assist households in monitoring their electricity consumption in real time, providing them with an instant overview of their energy usage.
 
 ## Table of Contents
 
@@ -9,20 +9,19 @@ Welcome to the SaveeRattrapage Git repository! This repository contains a projec
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Contributing](#Maintainers)
-- [License](#license)
+- [Developpers](#Maintainers)
 
 <a name="introduction"></a>
 ## Introduction
 
-SaveeRattrapage is a tool aimed at helping students stay organized and on top of their academic responsibilities. Whether you're attending school, college, or university, this application offers features that enable you to manage your coursework, assignments, and exams efficiently.
+Savee is an application designed to assist households in monitoring their electricity consumption in real time, providing them with an instant overview of their energy usage. This feature empowers users to make informed decisions regarding their electricity consumption, resulting in significant savings on their energy costs. By providing accurate and real-time information about the state of electricity consumption, Savee offers households the opportunity to reduce their energy footprint while optimizing their budget.
 
 <a name="features"></a>
 ## Features 
 
 - **Dashboard:** Monitor your energy consumption (prices, date,...) 
 - **CI/CD:** Deploy the source code and APK using Github actions pipeline.
-- **Notifications:** Export in pdf your energy consumtion.
+- **Export to PDF format:** Export your Bill consumption to pdf format.
 
 <a name="getting-started"></a>
 ## Getting Started 
