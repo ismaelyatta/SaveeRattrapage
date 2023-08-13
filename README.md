@@ -18,12 +18,14 @@ Welcome to the SaveeRattrapage Git repository! This repository contains a projec
 
 SaveeRattrapage is a tool aimed at helping students stay organized and on top of their academic responsibilities. Whether you're attending school, college, or university, this application offers features that enable you to manage your coursework, assignments, and exams efficiently.
 
+<a name="features"></a>
 ## Features 
 
 - **Dashboard:** Monitor your energy consumption (prices, date,...) 
 - **CI/CD:** Deploy the source code and APK using Github actions pipeline.
 - **Notifications:** Export in pdf your energy consumtion.
 
+<a name="getting-started"></a>
 ## Getting Started 
 
 Follow these steps to get the SaveeRattrapage project up and running on your local machine.
@@ -42,3 +44,9 @@ Before you begin, ensure you have the following:
 
    ```bash
    git clone https://github.com/ismaelyatta/SaveeRattrapage.git
+   
+ ```bash
+cd SaveeRattrapage
+
+   
+   
