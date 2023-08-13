@@ -1,11 +1,10 @@
 name: Android Release CI/CD
-on:
+'on':
   push:
     branches:
       - main
       - dev
-    tags:
-
+    tags: null
   pull_request:
     branches:
       - main
@@ -19,23 +18,24 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     permissions: write-all
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
       - name: Get registration token
         id: getRegToken
-        run: |
-            curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
+        run: >
+          curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H
+          'Authorization: token ${{ secrets.GITHUB_TOKEN }}'
+          https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
       - name: Set up Git
-        run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
-
+        run: >-
+          git config --global user.email "actions@github.com" && git config
+          --global user.name "GitHub Actions"
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: 11
-          distribution: 'adopt'
+          distribution: adopt
       - name: Make Gradle executable
         run: chmod +x ./gradlew
       - name: Build APK
@@ -46,8 +46,8 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
-            name: apk
-            path: app/build/outputs/apk/debug/app-debug.apk
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
   release:
     permissions: write-all
     name: release
@@ -55,49 +55,51 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     steps:
-      # ... release steps
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Get registration token
         id: getRegToken
-        run: |
-          curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
+        run: >
+          curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H
+          'Authorization: token ${{ secrets.GITHUB_TOKEN }}'
+          https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
       - name: Set up Git
-        run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+        run: >-
+          git config --global user.email "actions@github.com" && git config
+          --global user.name "GitHub Actions"
       - name: Download APK from build
         uses: actions/download-artifact@v1
         with:
-            name: apk
+          name: apk
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
-            name: app
-            path: app/build/outputs/apk/debug/app-debug.apk
+          name: app
+          path: app/build/outputs/apk/debug/app-debug.apk
       - name: Upload Source Code
         uses: actions/upload-artifact@v2
         with:
-            name: source-code
-            path: .
+          name: source-code
+          path: .
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         with:
-            tag_name: dev_app
-            release_name: Release ${{ github.ref }}
-            body: |
-              Changes in this Release
-            draft: false
-            prerelease: true
+          tag_name: dev_app
+          release_name: 'Release ${{ github.ref }}'
+          body: |
+            Changes in this Release
+          draft: false
+          prerelease: true
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }'
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: apk/app-debug.apk
-            asset_name: SaveeRattrapage.apk
-            asset_content_type: application/zip
-      # ... other steps
+          upload_url: '${{ steps.create_release.outputs.upload_url }}'
+          asset_path: apk/app-debug.apk
+          asset_name: SaveeRattrapage.apk
+          asset_content_type: application/zip
