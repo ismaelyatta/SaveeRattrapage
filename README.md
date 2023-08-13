@@ -13,7 +13,8 @@ Welcome to the SaveeRattrapage Git repository! This repository contains a projec
 - [Contributing](#contributing)
 - [License](#license)
 
-## Introduction {#introduction}
+<a name="introduction"></a>
+## Introduction
 
 SaveeRattrapage is a tool aimed at helping students stay organized and on top of their academic responsibilities. Whether you're attending school, college, or university, this application offers features that enable you to manage your coursework, assignments, and exams efficiently.
 
