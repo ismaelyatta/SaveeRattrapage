@@ -49,15 +49,16 @@ jobs:
     name: Release APK
     needs: apk
     runs-on: ubuntu-latest
+    permissions: write-all
+
     steps:
       - name: Get registration token
         id: getRegToken
         run: |
-              curl -X POST -H \"Accept: application/vnd.github.v3+json\"  -H
-              'Authorization: token ${{ secrets.GITHUB_TOKEN }}'
-              https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
-              - name: Set up Git
-                run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+          curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
+      - name: Set up Git
+        run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
       - name: Download APK from build
         uses: actions/download-artifact@v1
         with:
