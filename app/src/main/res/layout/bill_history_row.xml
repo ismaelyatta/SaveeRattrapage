@@ -13,6 +13,7 @@
         android:layout_weight="0.5"
         android:text="@string/sample_year"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <TextView
         android:id="@+id/bill_usage"
         android:layout_width="0dp"

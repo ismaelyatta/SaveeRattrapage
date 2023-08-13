@@ -90,5 +90,4 @@
         <item>m³</item>
     </string-array>
     <string name="title_activity_reading_chart">ReadingChart</string>
-    <?xml version="1.0" encoding="utf-8"?>
 </resources>

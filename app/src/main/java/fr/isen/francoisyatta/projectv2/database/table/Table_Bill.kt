@@ -1,16 +1,11 @@
-package fr.isen.francoisyatta.projectv2.database.table
+package fr.isen.francoisyatta.projectv2.database
+
 import android.content.ContentValues
 import android.provider.BaseColumns
 import  fr.isen.francoisyatta.projectv2.DateHelper
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.*
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Constants
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Database
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Table
-import fr.isen.francoisyatta.projectv2.Model.Bill
-
+import fr.isen.francoisyatta.projectv2.model.Bill
 class Table_Bill(database: Database) :
-    Table(database, Constants.BILL, true) {
-
+    Table_(database, Constants.BILL, true) {
     init {
         add(Column(Constants.DESCRIPTION, Column.Type.TEXT))
         add(Column(Constants.BEGIN, Column.Type.TEXT))

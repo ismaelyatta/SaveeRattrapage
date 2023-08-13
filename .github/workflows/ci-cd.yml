@@ -1,3 +1,36 @@
+
+name: Minimal Android CI Workflow
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
+    branches:
+      - dev
+name: Android Release CI/CD
+on:
+  push:
+    branches:
+      - main 
+      - dev
+  pull_request:
+    branches:
+      - main  
+      - dev 
+  release:
+    types:
+      - created
+
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
 name: Android Release CI/CD
 on:
   push:
@@ -26,13 +59,59 @@ jobs:
         with:
           java-version: 11
           distribution: 'adopt'
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
+      - name: Run Tests
+        run: bash ./gradlew test --stacktrace
+  apk:
+    name: Generate APK
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: 'adopt'
+      - name: Build APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+  release:
+    name: Release APK
+    needs: apk
+    runs-on: ubuntu-latest
+    permissions: write-all
 
+    steps:
+      - name: Get registration token
+        id: getRegToken
+        run: |
+          curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/myprofile/myrepo/actions/runners/registration-token
+      - name: Set up Git
+        run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
+        with:
+          name: apk
       - name: Make Gradle executable
         run: chmod +x ./gradlew
 
       - name: Build APK
         run: ./gradlew assembleRelease
 
+      - name: Upload APK artifact
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleRelease
       - name: Upload APK artifact
         uses: actions/upload-artifact@v2
         with:
@@ -71,6 +150,60 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Download the APK from the following link:
+            [APK Download Link](https://example.com/${{ needs.upload-to-cloud.outputs.url }})
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
+  upload-to-cloud:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Upload APK to Cloud Storage
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
+
+      - name: Get APK URL
+        id: get_apk_url
+        run: echo "::set-output name=url::$(echo ${{ steps.upload-to-cloud.outputs.artifact-upload-path }} | cut -c 2-)"
+      
+  release:
+    needs: upload-to-cloud
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: dev_app
+          release_name: Release ${{ github.ref }}
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: apk/app-debug.apk
+          asset_name: Savee.apk
+          asset_content_type: application/zip
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |

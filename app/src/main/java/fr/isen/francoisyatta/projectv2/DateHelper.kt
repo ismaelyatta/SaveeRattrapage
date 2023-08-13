@@ -7,6 +7,7 @@ import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit.DAYS
 
 object DateHelper {
+
     private val formatLong = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
     private val formatMedium = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
     private val formatTime = DateTimeFormatter.ofPattern("yyyy-MM-dd-HHmmss")
@@ -55,6 +56,4 @@ object DateHelper {
             }
         return result
     }
-
-
 }

@@ -1,14 +1,14 @@
 package fr.isen.francoisyatta.projectv2.database.table
+
 import android.content.ContentValues
 import android.provider.BaseColumns
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Column
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Constants
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Database
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Table
-import fr.isen.francoisyatta.projectv2.Model.*
-
-class Table_Item(database: Database):
-    Table(database, Constants.ITEM, true) {
+import fr.isen.francoisyatta.projectv2.database.Column
+import fr.isen.francoisyatta.projectv2.database.Constants
+import fr.isen.francoisyatta.projectv2.database.Database
+import fr.isen.francoisyatta.projectv2.database.Table_
+import fr.isen.francoisyatta.projectv2.model.Item
+class Table_Item(database: Database) :
+    Table_(database, Constants.ITEM, true)  {
     init {
         add(Column(Constants.BILL, Column.Type.INTEGER).apply {
             isForeignKeyConstraint = true

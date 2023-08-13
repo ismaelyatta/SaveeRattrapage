@@ -3,14 +3,13 @@ package fr.isen.francoisyatta.projectv2.database.table
 import android.content.ContentValues
 import android.provider.BaseColumns
 import fr.isen.francoisyatta.projectv2.DateHelper
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Column
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Constants
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Database
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Table
-import fr.isen.francoisyatta.projectv2.Model.*
-
+import fr.isen.francoisyatta.projectv2.database.Column
+import fr.isen.francoisyatta.projectv2.database.Constants
+import fr.isen.francoisyatta.projectv2.database.Database
+import fr.isen.francoisyatta.projectv2.database.Table_
+import fr.isen.francoisyatta.projectv2.model.Tariff
 class Table_Tariff(database: Database) :
-    Table(database, Constants.TARIFF, true) {
+    Table_(database, Constants.TARIFF, true) {
     init {
         add(Column(Constants.METER, Column.Type.INTEGER).apply {
             isForeignKeyConstraint = true

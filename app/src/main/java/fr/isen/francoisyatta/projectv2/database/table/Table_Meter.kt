@@ -1,15 +1,14 @@
 package fr.isen.francoisyatta.projectv2.database.table
 
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Database
 import android.content.ContentValues
 import android.provider.BaseColumns
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Column
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Constants
-import fr.isen.francoisyatta.projectv2.database.PropertyTable.Table
-import fr.isen.francoisyatta.projectv2.Model.*
-
+import fr.isen.francoisyatta.projectv2.database.Column
+import fr.isen.francoisyatta.projectv2.database.Constants
+import fr.isen.francoisyatta.projectv2.database.Database
+import fr.isen.francoisyatta.projectv2.database.Table_
+import fr.isen.francoisyatta.projectv2.model.Meter
 class Table_Meter(database: Database) :
-    Table(database, Constants.METER, true) {
+    Table_(database, Constants.METER, true) {
     init {
         add(Column(Constants.NUMBER, Column.Type.TEXT))
         add(Column(Constants.NAME, Column.Type.TEXT))

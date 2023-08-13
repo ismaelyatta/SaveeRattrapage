@@ -114,7 +114,7 @@ class MyAdapter (val arrayList: ArrayList<Model>, val context: Context) :
             //val model = arrayList.get(position)
 
             //avoir le titre de l'item selectionné
-            var gTitle : String = model.title
+            //var gTitle : String = model.title
 
             //prendre tous ces élements avec putExtra intent
             //intentStat.putExtra("iTitle" , gTitle)

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import fr.isen.francoisyatta.projectv2.R
 import fr.isen.francoisyatta.projectv2.databinding.ActivityDeviceDetailBinding
 import java.util.*
-import kotlin.concurrent.timer
 
 
 @SuppressLint("MissingPermission")
@@ -145,23 +144,6 @@ class DeviceDetailActivity : AppCompatActivity() {
             }
             gatt.setCharacteristicNotification(characteristic, enable)
             timer = Timer()
-
-            fun convertHexToTime(hexValue: String): String {
-                    val decimalValue = hexValue.toLongOrNull(16)
-                     if (decimalValue != null) {
-                         val hours = decimalValue / 3600
-                         val minutes = (decimalValue % 3600) / 60
-                         val seconds = decimalValue % 60
-
-                         return String.format("%02d:%02d:%02d", hours, minutes, seconds)
-                     }
-
-                return "Invalid hex value"
-            }
-
-            //val T = convertHexToTime(timer)
-
-
             timer?.schedule(object : TimerTask() {
                 override fun run() {
                     gatt.readCharacteristic(characteristic)
