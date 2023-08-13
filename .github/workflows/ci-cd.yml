@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Minimal Android CI Workflow
 
 on:
@@ -17,10 +18,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Setup JDK
+=======
+name: Android Release CI/CD
+on:
+  push:
+    branches:
+      - main 
+      - dev
+  pull_request:
+    branches:
+      - main  
+      - dev 
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    name: Build and Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+>>>>>>> 756bba2a298539ef7180717c8989bf721eccd1f9
         uses: actions/setup-java@v2
         with:
           java-version: 11
           distribution: 'adopt'
+<<<<<<< HEAD
       - name: Make Gradle executable
         run: chmod +x ./gradlew
       - name: Run Tests
@@ -62,12 +90,54 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: apk
+=======
+
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
+
+  upload-to-cloud:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Upload APK to Cloud Storage
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
+
+      - name: Get APK URL
+        id: get_apk_url
+        run: echo "::set-output name=url::$(echo ${{ steps.upload-to-cloud.outputs.artifact-upload-path }} | cut -c 2-)"
+      
+  release:
+    needs: upload-to-cloud
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+
+>>>>>>> 756bba2a298539ef7180717c8989bf721eccd1f9
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+<<<<<<< HEAD
           tag_name: dev_app
           release_name: Release ${{ github.ref }}
       - name: Upload Release APK
@@ -80,3 +150,30 @@ jobs:
           asset_path: apk/app-debug.apk
           asset_name: Savee.apk
           asset_content_type: application/zip
+=======
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Download the APK from the following link:
+            [APK Download Link](https://example.com/${{ needs.upload-to-cloud.outputs.url }})
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/*.apk
+      - name: Set up Git
+        run: git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+
+      - name: Download APK
+        run: |
+              GITHUB_TOKEN=$YOUR_GITHUB_TOKEN
+              RELEASE_TAG=v1.0.0  # Specify the release tag
+              ASSET_NAME=release-apk.zip  # Specify the asset name
+
+              RELEASE_ID=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${{ github.repository }}/releases/tags/$RELEASE_TAG" | jq -r '.id')
+              DOWNLOAD_URL=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets" | jq -r ".[] | select(.name == \"$ASSET_NAME\") | .browser_download_url")
+              curl -LJO -H "Authorization: token $GITHUB_TOKEN" "$DOWNLOAD_URL"
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+>>>>>>> 756bba2a298539ef7180717c8989bf721eccd1f9
