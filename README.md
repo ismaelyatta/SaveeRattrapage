@@ -43,10 +43,8 @@ Before you begin, ensure you have the following:
 
    ```bash
    git clone https://github.com/ismaelyatta/SaveeRattrapage.git
+   cd SaveeRattrapage
 
-2. Open Current directory  
- ```bash
-cd SaveeRattrapage
 
 ## Maintainers
 This project is mantained by:
