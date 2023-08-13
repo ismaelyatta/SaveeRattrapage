@@ -21,6 +21,7 @@ Savee is an application designed to assist households in monitoring their electr
 
 - **Dashboard:** Monitor your energy consumption (prices, date,...) 
 - **CI/CD:** Build Code and check if the repo contains error and Deploy the source code in a virtual machine dev and APK using Github actions pipeline.
+- **DataBase modules** Create tables for several items suchs like Bill, Consumption information in SQLLite 
 - **Export to PDF format:** Export your Bill consumption to pdf format.
 
 <a name="getting-started"></a>
