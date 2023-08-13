@@ -3,11 +3,9 @@ name: Minimal Android CI Workflow
 on:
   push:
     branches:
-      - main
-      - dev
+      - master
   pull_request:
     branches:
-      - main
       - dev
 
 jobs:
