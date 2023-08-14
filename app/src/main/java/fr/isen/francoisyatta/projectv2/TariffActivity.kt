@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import android.widget.DatePicker.OnDateChangedListener
-import fr.isen.francoisyatta.projectv2.DateHelper
-import fr.isen.francoisyatta.projectv2.R
 import fr.isen.francoisyatta.projectv2.database.Constants
 import fr.isen.francoisyatta.projectv2.model.Home
 import fr.isen.francoisyatta.projectv2.model.Meter
