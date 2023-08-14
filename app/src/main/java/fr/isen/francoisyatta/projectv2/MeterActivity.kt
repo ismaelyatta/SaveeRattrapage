@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
-import fr.isen.francoisyatta.projectv2.R
 import fr.isen.francoisyatta.projectv2.database.Constants
 import fr.isen.francoisyatta.projectv2.model.Home
 import fr.isen.francoisyatta.projectv2.model.Meter

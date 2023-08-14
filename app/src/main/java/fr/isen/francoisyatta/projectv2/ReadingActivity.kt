@@ -7,8 +7,6 @@ import android.widget.DatePicker
 import android.widget.DatePicker.OnDateChangedListener
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
-import fr.isen.francoisyatta.projectv2.DateHelper
-import fr.isen.francoisyatta.projectv2.R
 import fr.isen.francoisyatta.projectv2.database.Constants
 import fr.isen.francoisyatta.projectv2.model.Home
 import fr.isen.francoisyatta.projectv2.model.Meter

@@ -3,8 +3,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.fragment.app.FragmentActivity
-import fr.isen.francoisyatta.projectv2.DateHelper
-import fr.isen.francoisyatta.projectv2.R
 import fr.isen.francoisyatta.projectv2.database.Constants
 import fr.isen.francoisyatta.projectv2.model.Bill
 import fr.isen.francoisyatta.projectv2.model.Home

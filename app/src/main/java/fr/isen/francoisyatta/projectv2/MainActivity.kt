@@ -1,14 +1,11 @@
 package fr.isen.francoisyatta.projectv2
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View.OnClickListener
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Menu
@@ -18,33 +15,33 @@ import android.view.Window
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import fr.isen.francoisyatta.projectv2.DateHelper
-import fr.isen.francoisyatta.projectv2.DialogHelper
-import fr.isen.francoisyatta.projectv2.DialogHelper.DialogCommand
-import fr.isen.francoisyatta.projectv2.DialogHelper.OnListChangedListener
-import fr.isen.francoisyatta.projectv2.R
 import fr.isen.francoisyatta.projectv2.Adapter.Adapter_Bill
 import fr.isen.francoisyatta.projectv2.Adapter.Adapter_Meters
+import fr.isen.francoisyatta.projectv2.DialogHelper.DialogCommand
+import fr.isen.francoisyatta.projectv2.DialogHelper.OnListChangedListener
 import fr.isen.francoisyatta.projectv2.collections.List_Bill
 import fr.isen.francoisyatta.projectv2.collections.List_Meters
 import fr.isen.francoisyatta.projectv2.database.Database
 import fr.isen.francoisyatta.projectv2.database.Database.Companion.instance
 import fr.isen.francoisyatta.projectv2.model.Home
+import kotlinx.android.synthetic.main.activity_main.recyclerView
 import java.io.IOException
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import java.util.*
+import java.util.Currency
+import java.util.Locale
 import java.util.concurrent.Executors
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), OnListChangedListener {
-
+    private val useLayout1 = false
     private val progress: ProgressBar by lazy { findViewById(R.id.progressBar) }
     private val viewPager: ViewPager2 by lazy { findViewById(R.id.container) }
     private val tabLayout: TabLayout by lazy { findViewById(R.id.tabs) }
@@ -54,46 +51,46 @@ class MainActivity : AppCompatActivity(), OnListChangedListener {
     private val dialogHelper by lazy { DialogHelper() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        if (useLayout1){
+            setContentView(R.layout.activity_main)
+            val arrayList = ArrayList<Model>()
 
-        val arrayList = ArrayList<Model>()
-
-        arrayList.add(
-            Model(
-                "Ma consommation",
-                "Afficher votre consommation électrique",
-                R.drawable.maconso
+            arrayList.add(
+                Model(
+                    "Ma consommation",
+                    "Afficher votre consommation électrique",
+                    R.drawable.maconso
+                )
             )
-        )
-        arrayList.add(Model("Bilan Carbone", "Afficher votre bilan carbone", R.drawable.co2))
-        arrayList.add(
-            Model(
-                "Détection d'anomalies",
-                "Afficher vos anomalies de consommation d'eau",
-                R.drawable.warning
+            arrayList.add(Model("Bilan Carbone", "Afficher votre bilan carbone", R.drawable.co2))
+            arrayList.add(
+                Model(
+                    "Détection d'anomalies",
+                    "Afficher vos anomalies de consommation d'eau",
+                    R.drawable.warning
+                )
             )
-        )
-        arrayList.add(
-            Model(
-                "Maintenance prédictive",
-                "Afficher les améliorations possibles",
-                R.drawable.maintenance
+            arrayList.add(
+                Model(
+                    "Maintenance prédictive",
+                    "Afficher les améliorations possibles",
+                    R.drawable.maintenance
+                )
             )
-        )
-        arrayList.add(Model("Aide", "Un problème ? Contactez nous", R.drawable.aide))
-        arrayList.add(Model("BLE", "Connexion BLE", R.drawable.bluetooth))
+            arrayList.add(Model("Aide", "Un problème ? Contactez nous", R.drawable.aide))
+            arrayList.add(Model("BLE", "Connexion BLE", R.drawable.bluetooth))
 
-        val myAdapter = MyAdapter(arrayList, this)
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = myAdapter
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.main)
-        database = instance(this)
-        viewPager.adapter = pagerAdapter
-        val titles = arrayOf(getString(R.string.meters), getString(R.string.bills))
-        TabLayoutMediator(tabLayout, viewPager) { tab, pos -> tab.text = titles[pos] }.attach()
-
+            val myAdapter = MyAdapter(arrayList, this)
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.adapter = myAdapter
+        }
+        else {
+            setContentView(R.layout.main)
+            database = instance(this)
+            viewPager.adapter = pagerAdapter
+            val titles = arrayOf(getString(R.string.meters), getString(R.string.bills))
+            TabLayoutMediator(tabLayout, viewPager) { tab, pos -> tab.text = titles[pos] }.attach()
+        }
     }
 
     inner class PagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
