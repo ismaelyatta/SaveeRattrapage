@@ -9,6 +9,7 @@ Welcome to the SaveeRattrapage Git repository! This repository contains a projec
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [ScreenShot](#Screenshot)
 - [Developpers](#Maintainers)
 
 <a name="introduction"></a>
@@ -28,6 +29,15 @@ Savee is an application designed to assist households in monitoring their electr
 ## Getting Started 
 
 Follow these steps to get the SaveeRattrapage project up and running on your local machine.
+
+## Screenshot
+[<img src="https://github.com/ismaelyatta/SaveeRattrapage/blob/master/savee1.png" align="left"
+width="200"
+    hspace="10" vspace="10">](https://github.com/ismaelyatta/SaveeRattrapage/blob/master/savee2.png)
+[<img src="https://github.com/ismaelyatta/SaveeRattrapage/blob/master/savee3.png" align="center"
+width="200"
+    hspace="10" vspace="10">](https://github.com/ismaelyatta/SaveeRattrapage/blob/master/savee4.png)
+    
 
 ### Prerequisites 
 
